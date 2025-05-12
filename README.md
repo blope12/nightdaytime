@@ -1,6 +1,12 @@
 # React Starry Clock App
 
+![Screenshot 2025-05-12 215732](https://github.com/user-attachments/assets/d45f39fd-f37b-4491-acc7-ce8b9030d502)
+
+
 A React-based app that displays a dynamic clock with a starry background. The background changes based on the time of day (day/night mode), featuring smooth animations and glowing effects.
+
+## SEE SITE HERE
+https://effervescent-alpaca-87f606.netlify.app
 
 ## Features
 
