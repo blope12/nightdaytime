@@ -1,0 +1,194 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Clock Container */
+.clock-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1s ease-in-out, background 1s ease-in-out;
+}
+
+/* Day and Night Backgrounds */
+.clock-container.day {
+  background: linear-gradient(135deg, #fceabb 0%, #f8b500 50%, #87cefa 100%);
+}
+
+.clock-container.night {
+  background: linear-gradient(135deg, #0b0c2a 0%, #1b1f3b 50%, #3a3d5c 100%);
+}
+
+/* Clock Wrapper */
+.clock-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+/* Glow effect for the clock */
+.clock-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 80%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Orbit around the clock */
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+/* Rotating orbit animation */
+.rotating {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotateOrb 30s linear infinite;
+}
+
+/* Orb (sun/moon) styling */
+.orb {
+  position: absolute;
+  left: 120px;
+  top: 170px;
+  width: 50px;
+  height: 50px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.sun, .moon {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sun {
+  background-image: url("ss.png");
+  animation: sunGlow 1.5s ease-in-out infinite alternate;
+}
+
+.moon {
+  background-image: url("mm.png");
+  animation: moonGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* Glowing effect for Sun */
+@keyframes sunGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 227, 46, 0.582), 0 0 20px rgba(255, 255, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 223, 0, 1), 0 0 30px rgba(255, 255, 0, 1);
+  }
+}
+
+/* Glowing effect for Moon */
+@keyframes moonGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.582), 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 1);
+  }
+}
+
+/* Time Display */
+.clock-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4.25rem;
+  color: white;
+  font-family: "Luckiest Guy", cursive;
+  letter-spacing: 0.1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.time-unit {
+  display: inline-flex;
+  align-items: center;
+}
+
+.colon {
+  margin: 0 0.15em;
+}
+
+/* Pulsing effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Rotate the orbit */
+@keyframes rotateOrb {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* City Name */
+.city-name {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  opacity: 0.8;
+  font-family: "Luckiest Guy", cursive;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .clock-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+
+  .clock-time {
+    font-size: 2.5rem;
+  }
+
+  .orb {
+    left: 80px;
+    top: 110px;
+    width: 40px;
+    height: 40px;
+  }
+}

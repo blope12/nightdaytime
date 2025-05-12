@@ -1,0 +1,94 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Star Layers */
+#stars, #stars2, #stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Make stars non-interactive */
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 100px 200px #FFF, 300px 400px #FFF, 500px 100px #FFF,
+              800px 300px #FFF, 1200px 500px #FFF, 1600px 200px #FFF,
+              1000px 1200px #FFF, 800px 1600px #FFF, 300px 1500px #FFF;
+  animation: animStar 50s linear infinite;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 200px 100px #FFF, 600px 300px #FFF, 1000px 400px #FFF,
+              1500px 900px #FFF, 200px 1200px #FFF, 700px 1700px #FFF,
+              1400px 500px #FFF, 1600px 600px #FFF;
+  animation: animStar 100s linear infinite;
+  opacity: 0.9;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 150px 600px #FFF, 700px 100px #FFF, 1300px 350px #FFF,
+              1900px 500px #FFF, 800px 1100px #FFF, 1500px 1200px #FFF,
+              300px 800px #FFF, 1600px 1800px #FFF;
+  animation: animStar 150s linear infinite;
+  opacity: 0.7;
+}
+
+/* Star Animation */
+@keyframes animStar {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-2000px) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Twinkle effect */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Applying twinkle animation */
+#stars, #stars2, #stars3 {
+  animation: twinkle 1s infinite ease-in-out;
+}
+
+/* Meteorite Styling */
+.meteorite {
+  position: absolute;
+  background-color: #ffffff; /* Meteor color */
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(100vw, 100vh) rotate(720deg);
+  }
+}
