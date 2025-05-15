@@ -13,27 +13,42 @@ export default function DayNightClock() {
     return () => clearInterval(interval);
   }, []);
 
-  // Mouse tracking for parallax effect
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const { innerWidth: width, innerHeight: height } = window;
-      const percentX = (clientX / width) - 0.5;
-      const percentY = (clientY / height) - 0.5;
+useEffect(() => {
+  const updateParallax = (xPercent, yPercent) => {
+    ["stars", "stars2", "stars3"].forEach((id, index) => {
+      const speed = 30 - index * 10;
+      const element = document.getElementById(id);
+      if (element) {
+        element.style.transform = `translate(${xPercent * speed}px, ${yPercent * speed}px)`;
+      }
+    });
+  };
 
-      // Apply parallax effect on the stars layers
-      ["stars", "stars2", "stars3"].forEach((id, index) => {
-        const speed = 30 - index * 10;
-        const element = document.getElementById(id);
-        if (element) {
-          element.style.transform = `translate(${percentX * speed}px, ${percentY * speed}px)`;
-        }
-      });
-    };
+  const handleMouseMove = (e) => {
+    const { innerWidth, innerHeight } = window;
+    const percentX = e.clientX / innerWidth - 0.5;
+    const percentY = e.clientY / innerHeight - 0.5;
+    updateParallax(percentX, percentY);
+  };
 
+  const handleOrientation = (e) => {
+    const percentX = e.gamma / 45; // gamma: left to right [-90,90]
+    const percentY = e.beta / 90;  // beta: front to back [-180,180]
+    updateParallax(percentX, percentY);
+  };
+
+  if (window.DeviceOrientationEvent && /Mobi|Android/i.test(navigator.userAgent)) {
+    window.addEventListener("deviceorientation", handleOrientation);
+  } else {
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }
+
+  return () => {
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("deviceorientation", handleOrientation);
+  };
+}, []);
+
 
   // Meteorite spawning logic
   useEffect(() => {
