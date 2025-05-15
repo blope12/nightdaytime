@@ -44,7 +44,7 @@ Make sure you have the following installed:
 Clone the repository to your local machine:
 
 ```bash
-https://github.com/blope12/nightdaytime.git
+git clone https://github.com/blope12/nightdaytime.git
 ```
 ```bash
 cd starry-clock
